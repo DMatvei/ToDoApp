@@ -4,8 +4,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 
     //new
-//    id 'kotlin-android-extensions'
     id 'kotlin-parcelize'
+//    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
 //    id 'androidx.navigation.safeargs.kotlin'
@@ -33,7 +33,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
     }
+
+    buildFeatures {
+        viewBinding true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
