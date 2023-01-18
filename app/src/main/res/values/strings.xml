@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Tasks App By Matt</string>
     <string name="add_tasks">Add Tasks</string>
+    <string name="task_name_RU">Название задачи</string>
+    <string name="important_task_Ru">Важная задача</string>
 </resources>
