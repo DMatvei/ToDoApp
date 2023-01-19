@@ -3,7 +3,6 @@ package com.example.tasksappbymatt.data
 import android.content.Context
 import android.util.Log
 import androidx.datastore.core.DataStore
-import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -59,7 +58,7 @@ class PreferencesManager @Inject constructor(@ApplicationContext context: Contex
         }
     }
 
-    suspend fun updateSortOrder(hideCompleted: Boolean){
+    suspend fun updateHideCompleted(hideCompleted: Boolean){
         dataStore.edit { preferences ->
             preferences[PreferencesKeys.HIDE_COMPLETED] = hideCompleted
 
