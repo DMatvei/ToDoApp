@@ -3,4 +3,10 @@
     <string name="add_tasks">Add Tasks</string>
     <string name="task_name_RU">Название задачи</string>
     <string name="important_task_Ru">Важная задача</string>
+    <string name="search_RU">Поиск</string>
+    <string name="sort_ru">Сортировка</string>
+    <string name="sort_by_name_ru">Сортировка по имени</string>
+    <string name="sort_by_date_created_ru">Сортировка по времени создания</string>
+    <string name="hide_completed_ru">Скрыть выполненные</string>
+    <string name="delete_all_completed_ru">Удалить выполненные</string>
 </resources>
