@@ -10,7 +10,7 @@ import com.example.tasksappbymatt.data.Task
 import com.example.tasksappbymatt.databinding.ItemTaskBinding
 
 
-class TasksAdapter : ListAdapter<Task, TasksAdapter.TasksViewHolder > (DiffCallback()){
+class TasksAdapter : ListAdapter<Task, TasksAdapter.TasksViewHolder> (DiffCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasksViewHolder {
         val binding = ItemTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)

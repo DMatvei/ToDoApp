@@ -2,6 +2,7 @@ package com.example.tasksappbymatt.ui.tasks
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import com.example.tasksappbymatt.data.SortOrder
 import com.example.tasksappbymatt.data.TaskDao
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,4 +36,3 @@ class TasksViewModel @Inject constructor(
 
 }
 
-enum class SortOrder{BY_NAME, BY_DATE}

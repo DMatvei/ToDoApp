@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasksappbymatt.R
+import com.example.tasksappbymatt.data.SortOrder
 import com.example.tasksappbymatt.databinding.FragmentTasksBinding
 import com.example.tasksappbymatt.util.onQueryTextChanged
 import dagger.hilt.android.AndroidEntryPoint

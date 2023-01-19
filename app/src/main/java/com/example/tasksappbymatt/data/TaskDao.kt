@@ -1,7 +1,6 @@
 package com.example.tasksappbymatt.data
 
 import androidx.room.*
-import com.example.tasksappbymatt.ui.tasks.SortOrder
 import kotlinx.coroutines.flow.Flow
 
 
