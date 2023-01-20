@@ -3,11 +3,9 @@ package com.example.tasksappbymatt.data
 import android.content.Context
 import android.util.Log
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.emptyPreferences
-import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.*
+import androidx.datastore.preferences.preferencesDataStore
+
 
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
@@ -27,10 +25,15 @@ data class FilterPreferences(
     val hideCompleted: Boolean
 )
 
-@Singleton
-class PreferencesManager @Inject constructor(@ApplicationContext context: Context, private val dataStore: DataStore<Preferences>){
 
-    // At the top level of your kotlin file:
+
+@Singleton
+class PreferencesManager @Inject constructor(
+
+    private val dataStore: DataStore<Preferences>
+    ){
+
+
 
 
     val preferencesFlow: Flow<FilterPreferences> = dataStore.data
