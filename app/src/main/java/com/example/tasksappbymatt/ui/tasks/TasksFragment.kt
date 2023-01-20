@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,11 +17,14 @@ import com.example.tasksappbymatt.R
 import com.example.tasksappbymatt.data.SortOrder
 import com.example.tasksappbymatt.data.Task
 import com.example.tasksappbymatt.databinding.FragmentTasksBinding
+import com.example.tasksappbymatt.util.exhaustive
 import com.example.tasksappbymatt.util.onQueryTextChanged
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+
+
 
 
 @AndroidEntryPoint
@@ -39,12 +43,13 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), TasksAdapter.OnItemClic
         binding.apply {
             recyclerViewTasks.apply {
                 adapter = taskAdapter
-                layoutManager= LinearLayoutManager(requireContext())
+                layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
 
             }
 
-            ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
+            ItemTouchHelper(object :
+                ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
                 override fun onMove(
                     recyclerView: RecyclerView,
                     viewHolder: RecyclerView.ViewHolder,
@@ -59,6 +64,11 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), TasksAdapter.OnItemClic
                 }
             }).attachToRecyclerView(recyclerViewTasks)
 
+
+            fabAddTask.setOnClickListener{
+                viewModel.onAddNewTaskClick()
+
+            }
 
         }
 
@@ -75,7 +85,15 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), TasksAdapter.OnItemClic
                                 viewModel.onUndoDeleteClick(event.task)
                             }.show()
                     }
-                }
+                    is TasksViewModel.TasksEvent.NavigateToAddTaskScreen -> {
+                        val action = TasksFragmentDirections.actionTasksFragmentToAddEditTaskFragment("Новая задача", null)
+                        findNavController().navigate(action)
+                    }
+                    is TasksViewModel.TasksEvent.NavigateToEditTaskScreen -> {
+                        val action = TasksFragmentDirections.actionTasksFragmentToAddEditTaskFragment("Изменить задачу",event.task)
+                        findNavController().navigate(action)
+                    }
+                }.exhaustive
 
             }
         }
