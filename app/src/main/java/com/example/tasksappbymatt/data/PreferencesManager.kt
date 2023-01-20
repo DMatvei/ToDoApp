@@ -1,13 +1,9 @@
 package com.example.tasksappbymatt.data
 
-import android.content.Context
+
 import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
-import androidx.datastore.preferences.preferencesDataStore
-
-
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
@@ -18,7 +14,7 @@ import javax.inject.Singleton
 
 private const val TAG = "PreferencesManager"
 
-enum class SortOrder{BY_NAME, BY_DATE}
+enum class SortOrder { BY_NAME, BY_DATE }
 
 data class FilterPreferences(
     val sortOrder: SortOrder,
@@ -26,22 +22,19 @@ data class FilterPreferences(
 )
 
 
-
 @Singleton
 class PreferencesManager @Inject constructor(
 
     private val dataStore: DataStore<Preferences>
-    ){
-
-
+) {
 
 
     val preferencesFlow: Flow<FilterPreferences> = dataStore.data
         .catch { exception ->
-            if (exception is IOException){
-                Log.e(TAG, "Error reading preferences", exception )
+            if (exception is IOException) {
+                Log.e(TAG, "Error reading preferences", exception)
                 emit(emptyPreferences())
-            } else  {
+            } else {
                 throw exception
             }
 
@@ -54,14 +47,14 @@ class PreferencesManager @Inject constructor(
             FilterPreferences(sortOrder, hideCompleted)
         }
 
-    suspend fun updateSortOrder(sortOrder: SortOrder){
-        dataStore.edit{ preferences ->
+    suspend fun updateSortOrder(sortOrder: SortOrder) {
+        dataStore.edit { preferences ->
             preferences[PreferencesKeys.SORT_ORDER] = sortOrder.name
 
         }
     }
 
-    suspend fun updateHideCompleted(hideCompleted: Boolean){
+    suspend fun updateHideCompleted(hideCompleted: Boolean) {
         dataStore.edit { preferences ->
             preferences[PreferencesKeys.HIDE_COMPLETED] = hideCompleted
 

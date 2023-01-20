@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import com.example.tasksappbymatt.data.PreferencesManager
-import com.example.tasksappbymatt.data.TaskDao
+
 import com.example.tasksappbymatt.data.TaskDatabase
 import dagger.Module
 import dagger.Provides
