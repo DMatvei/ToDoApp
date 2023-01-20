@@ -9,7 +9,6 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
-
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.tasksappbymatt.R
@@ -43,7 +42,11 @@ class AddEditTaskFragment : Fragment(R.layout.fragment_add_edit_task) {
 
             }
 
-            checkBoxImportant.setOnClickListener {
+            checkBoxImportant.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.taskImportance = isChecked
+            }
+            
+            fabSaveTask.setOnClickListener {
                 viewModel.onSaveClick()
             }
 
@@ -53,6 +56,9 @@ class AddEditTaskFragment : Fragment(R.layout.fragment_add_edit_task) {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.addEditTaskEvent.collect { event ->
                 when (event) {
+                    is AddEditTaskViewModel.AddEditTaskEvent.ShowInvalidInputMessage -> {
+                        Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG).show()
+                    }
                     is AddEditTaskViewModel.AddEditTaskEvent.NavigateBackWithResult -> {
                         binding.editTextTaskName.clearFocus()
                         setFragmentResult(
@@ -60,9 +66,6 @@ class AddEditTaskFragment : Fragment(R.layout.fragment_add_edit_task) {
                             bundleOf("add_edit_result" to event.result)
                         )
                         findNavController().popBackStack()
-                    }
-                    is AddEditTaskViewModel.AddEditTaskEvent.ShowInvalidInputMessage -> {
-                        Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG).show()
                     }
                 }.exhaustive
 
